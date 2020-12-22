@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <tree-chart :data="data" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import TreeChart from './components/TreeChart.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    TreeChart,
+  },
+  data() {
+    return {
+      data: null,
+    };
+  },
+  created() {
+    fetch(
+      'https://gist.githubusercontent.com/bumbeishvili/dc0d47bc95ef359fdc75b63cd65edaf2/raw/c33a3a1ef4ba927e3e92b81600c8c6ada345c64b/orgChart.json',
+    )
+      .then((d) => d.json())
+      .then((d) => {
+        console.log('fetched data');
+        this.data = d;
+      });
   },
 };
 </script>

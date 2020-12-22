@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build --target wc --inline-vue --name org-chart",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "d3-org-chart": "^1.1.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
