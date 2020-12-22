@@ -18,9 +18,14 @@ export default {
       this.renderChart(value);
     },
   },
-  created() {},
+  mounted() {
+    if (this.data) {
+      this.renderChart(this.data);
+    }
+  },
   methods: {
     renderChart(data) {
+      console.log('renderChart');
       if (!this.chartReference) {
         this.chartReference = new TreeChart();
       }
