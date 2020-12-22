@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/org.json"> -->
+  <div>
     <tree-chart :data="data" />
   </div>
 </template>
@@ -13,33 +12,35 @@ export default {
   components: {
     TreeChart,
   },
+  props: {
+    url: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       data: null,
     };
   },
+  watch: {
+    url(value) {
+      this.updateData(value);
+    },
+  },
   created() {
-    fetch(
-      '/org.json',
-    )
-      .then((d) => d.json())
-      .then((d) => {
-        console.log('fetched data');
-        this.data = d;
-      });
+    console.log(`VUE_APP_DATA_URL: ${process.env.VUE_APP_DATA_URL}`);
+    this.updateData(this.url || process.env.VUE_APP_DATA_URL);
   },
   methods: {
+    updateData(url) {
+      fetch(url)
+        .then((d) => d.json())
+        .then((d) => {
+          console.log('fetched data');
+          this.data = d;
+        });
+    },
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
